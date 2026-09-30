@@ -11,6 +11,7 @@ async function withServer(run) {
     const address = server.address();
     await run("http://127.0.0.1:" + address.port);
   } finally {
+    server.closeAllConnections();
     await new Promise((resolve) => server.close(resolve));
   }
 }
